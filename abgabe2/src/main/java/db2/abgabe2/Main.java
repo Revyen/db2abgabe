@@ -148,7 +148,7 @@ public class Main {
 		System.out.printf("Query:%5d \nWhole:%5d\n",qstop-start,stop-start);
 	}
 
-	// Aufgabe 2
+	// Aufgabe 2 Funktion
 	public void datenEinfuegen()
 	{
 		kategorieEinfuegen("Alkoholfreie");

@@ -49,6 +49,7 @@ public class lrds_ArtikelKategorie {
 		return lrds_artikelkategorie;
 	}
 	
+	// Angepasste toString()
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

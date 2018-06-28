@@ -63,7 +63,7 @@ public class lrds_Artikel {
 		return this.lrds_artikelUeberkategorie;
 	}
 	
-	// Angepasste toString() Funktion 
+	// Angepasste toString()
 	@Override
 	public String toString() {
 		return String.format("|%-15s | %-5d | %9.2f€ | %-30s | %-20s|", this.artikelName,this.artikelNummer,this.preis,this.lrds_artikelkategorie,this.lrds_artikelUeberkategorie).toString();
