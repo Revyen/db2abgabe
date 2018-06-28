@@ -14,15 +14,19 @@ import javax.persistence.Table;
 public class lrds_Artikel {
 	@Column(name="NAME",length = 50)
 	private String artikelName;
+	
+	// Automatisch generierte ID
 	@Id
 	@Column(name="A_ID",nullable = false,updatable = false)
 	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence_Artikel")
 	private Long artikelNummer;
 	private Double preis;
+	
+	// Artikel Referenz zu der Hauptkategorie
 	@ManyToOne
 	@JoinColumn(name="akID", referencedColumnName="AK_ID")
 	private lrds_ArtikelKategorie lrds_artikelkategorie;
-	
+	// Artikel Referenz zu der direkt überliegenden Kategorie
 	@ManyToOne
 	@JoinColumn(name="akUeID", referencedColumnName="AK_ID")
 	private lrds_ArtikelKategorie lrds_artikelUeberkategorie;
@@ -59,6 +63,7 @@ public class lrds_Artikel {
 		return this.lrds_artikelUeberkategorie;
 	}
 	
+	// Angepasste toString() Funktion 
 	@Override
 	public String toString() {
 		return String.format("|%-15s | %-5d | %9.2f€ | %-30s | %-20s|", this.artikelName,this.artikelNummer,this.preis,this.lrds_artikelkategorie,this.lrds_artikelUeberkategorie).toString();

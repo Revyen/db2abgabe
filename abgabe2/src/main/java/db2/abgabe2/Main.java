@@ -16,17 +16,19 @@ public class Main {
 	public static void main(String[] args) {
 		Main m = new Main();
 		m.dbConnect();
-		m.fillData();
+		m.datenEinfuegen();
 		m.printKategorieArtikel();
 		m.printKategorieArtikelNativ();
 		
 	}
-	
+	// Funktion zur erstellung der Verbindung zu der DB
 	public void dbConnect()
 	{
+		// Session reset
 		s = null;
 		try
 		{
+			// Session wird aus der Konfiguration generiert und geöffnet
 			SessionFactory sf = new Configuration().configure().buildSessionFactory();
 			s = sf.openSession();
 		}
@@ -46,6 +48,7 @@ public class Main {
 		return s;
 	}
 
+	// Hilfsfunktion zu Aufgabe 2
 	public void artikelEinfuegen(String ArtikelName,Double Preis,lrds_ArtikelKategorie Kategorie,lrds_ArtikelKategorie UeberKategorie)
 	{
 		System.out.println("--------Artikel einfuegen--------");
@@ -60,6 +63,7 @@ public class Main {
 		tx.commit();
 	}
 	
+	// Hilfsfunktion zu Aufgabe 2
 	public void kategorieEinfuegen(String KategorieName)
 	{
 		System.out.println("--------Kategorie einfuegen--------");
@@ -82,6 +86,7 @@ public class Main {
 		return a;
 	}
 	
+	// Aufgabe 3
 	public void printKategorieArtikel()
 	{
 		
@@ -113,6 +118,7 @@ public class Main {
 		System.out.printf("Query:%5d \nWhole:%5d\n",qstop-start,stop-start);
 	}
 	
+	// Aufgabe 4
 	public void printKategorieArtikelNativ()
 	{
 		
@@ -142,8 +148,8 @@ public class Main {
 		System.out.printf("Query:%5d \nWhole:%5d\n",qstop-start,stop-start);
 	}
 
-
-	public void fillData()
+	// Aufgabe 2
+	public void datenEinfuegen()
 	{
 		kategorieEinfuegen("Alkoholfreie");
 		kategorieEinfuegen("Alkoholhaltige");

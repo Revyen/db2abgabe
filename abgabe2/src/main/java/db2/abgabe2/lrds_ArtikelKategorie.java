@@ -26,11 +26,10 @@ fields = {
 }))
 @NamedNativeQuery(name="GetKategorien",
 query="Select * from lrds_Artikelkategorie",resultSetMapping="MappingKategorie")
-
-
 public class lrds_ArtikelKategorie {
 	@Column(name="NAME",length = 50)
 	private String akName;
+	// Automatisch generierte ID
 	@Id
 	@Column(name="AK_ID",nullable = false,updatable = false)
 	@GeneratedValue(strategy=GenerationType.AUTO, generator = "id_Sequence_Kategorie")
