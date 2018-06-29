@@ -21,6 +21,26 @@ public class Main {
 		m.printKategorieArtikelNativ();
 		
 	}
+	
+	/*
+	 * Aufgabe 4
+	 * a)
+	 * Die Datenbank führt in Aufgabe 3 auf jede Zeile einen einzelnen Select aus
+	 * was durch ein native Query beschleunigt werden kann da alle daten nur einmal per
+	 * Select aufgerufen werden
+	 * 
+	 * c)
+	 * Unsere Abfrage von Aufgabe 3 sucht nach alle Kategorien, Über- wie Unterkategorien
+	 * und gibt die referenzierten Artikel dazu aus
+	 * Die Abfrage von Aufgabe 4 sucht nach alle Kategorien die keine Überkategorien sind
+	 * und gibt deren referenzierten Artikel dazu aus
+	 * Wir hatten überlegt anstatt der Kategorien die Artikel auszugeben und ihre Kategorien aus der Referenz zu beziehen
+	 * was aber aus unserer sicht nicht der Abfrage von Aufgabe 3 entspricht was aber wiederum bei test einen weitaus
+	 * schnellere Performance besaß
+	 * Unsere native Query ist fast 3 mal schneller als das query
+	 * Die Methode der native query ist etwa 2 mal schneller als die query
+	 */
+	
 	// Funktion zur erstellung der Verbindung zu der DB
 	public void dbConnect()
 	{
@@ -40,12 +60,8 @@ public class Main {
 	
 	public void dbDisconnect()
 	{
+		//Session wird geschlossen
 		s.close();
-	}
-
-	public Session getSession()
-	{
-		return s;
 	}
 
 	// Hilfsfunktion zu Aufgabe 2
@@ -76,6 +92,7 @@ public class Main {
 		tx.commit();
 	}
 	
+	//Hilfsfunktion für Aufgabe 2
 	public lrds_ArtikelKategorie getKategorieFromDB(String Kategorie)
 	{
 		lrds_ArtikelKategorie a = new lrds_ArtikelKategorie();
@@ -86,13 +103,16 @@ public class Main {
 		return a;
 	}
 	
-	// Aufgabe 3
+	// Aufgabe 3 b)
 	public void printKategorieArtikel()
 	{
 		
 		System.out.println("\n\n--------Liste Kategorien und Artikel auf--------");
 		
 		String hql_query= "from lrds_ArtikelKategorie";
+		/*String hql_query= "Select ak from lrds_ArtikelKategorie ak, lrds_Artikel a"
+        + "Where ak.AK_ID=a.akid"
+        + "Order by ak.AK_ID";*/
 		Long start = System.nanoTime();
 		Query query = s.createQuery(hql_query);
 		List<lrds_ArtikelKategorie> result = query.getResultList();
@@ -130,8 +150,6 @@ public class Main {
 		Long qstop = System.nanoTime();
 		for(lrds_ArtikelKategorie ak : result)
 		{
-			if(ak.getArtikel().size() != 0)
-			{
 			System.out.println("Kategorie: "+ak);
 			System.out.println("----------------------------------------------------------------------------------------------");
 			System.out.println("|Name            | ID    |      Preis | Kategorie                      | Überkategorie       |");
@@ -141,7 +159,6 @@ public class Main {
 				System.out.println(a);
 			}
 			System.out.println("--------------------------------------------------------------------------------------------- ");
-			}
 		}
 		System.out.println();
 		Long stop = System.nanoTime();

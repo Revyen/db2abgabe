@@ -25,7 +25,10 @@ fields = {
 		@FieldResult(name="akID", column="AK_ID")
 }))
 @NamedNativeQuery(name="GetKategorien",
-query="Select * from lrds_Artikelkategorie",resultSetMapping="MappingKategorie")
+query="Select distinct ak.AK_ID, ak.NAME\n" + 
+    "FROM LRDS_ARTIKELKATEGORIE ak\n" + 
+    "Join LRDS_ARTIKEL a on ak.AK_ID=a.AKID\n" + 
+    "order by ak.AK_ID",resultSetMapping="MappingKategorie")
 public class lrds_ArtikelKategorie {
 	@Column(name="NAME",length = 50)
 	private String akName;

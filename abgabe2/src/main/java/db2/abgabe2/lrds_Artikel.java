@@ -9,8 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
+@SqlResultSetMapping(name= "MappingAtikel",
+entities=@EntityResult(entityClass=db2.abgabe2.lrds_Artikel.class,
+fields = {
+    @FieldResult(name="artikelName", column="NAME"),
+    @FieldResult(name="artikelNummer", column="A_ID"),
+    @FieldResult(name="preis", column="PREIS")
+}))
 public class lrds_Artikel {
 	@Column(name="NAME",length = 50)
 	private String artikelName;
